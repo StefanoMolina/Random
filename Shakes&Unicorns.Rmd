@@ -1,0 +1,56 @@
+---
+title: "Unicorns"
+author: "Stefano Molina"
+date: "20/4/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+load(file="Untitled.RData")
+```
+
+## Unicornios y Frapuccinos
+
+Desde el anuncio de Starbucks sobre su nuevo producto, el Unicorn Frapuccino que incluye sabores a chocolate, vainilla, mango y cítricos, mucho ha resaltado en redes sociales tratando de alertar a los consumidores sobre su alto contenido calórico. Es cierto que 410 KCal en una bebida es demasiado, sobre todo suponiendo una dieta de 2000 KCal diarias para la persona promedio, pero ¿es realmente tan malo como lo han publicado? Para responder ésta pregunta se tomaron datos (mg de sodio y KCal) de bebidas similares que podrían representar la competencia de Starbucks en el segmento de bebidas azucaradas frías, las empresas elegidas fueron Burger King, Carl's Jr., Dairy Queen, Johnny Rockets, McDonald's y Wendy's. Un punto importante es que los datos fueron obtenidos de las secciones de nutrición de dichas cadenas y aunque hubiera sido deseable incluir a la competencia mexicana, no parece que alguna publique el contenido nutricional de sus bebidas (te estoy viendo a ti, Cielito Querido).
+
+```{r}
+head(shake)
+```
+
+## Resumen
+
+Se comienza anotando y aprendiendo los datos del Unicorn Frapuccino, que parece ser la perdición de las dietas y el nuevo objeto de controversia de este mundo moderno. Starbucks reporta que un Unicorn Frapuccino de 16 onzas(alrededor de 500 ml) contiene 410 KCal y 230 mg de sodio. Una persona promedio, contrario a lo que se piensa, debe consumir menos de 2000 KCal al día, siendo la ingesta exacta para mantener el peso determinada por una función de peso y estatura, por lo que como dicen, un vaso de Starbucks Grande de esta bebida consumiría casi el 33% de lo requerido por una persona al día.
+
+Para poder comparar ésta bebida con las demás que fueron capturadas se puede comenzar por mostrar el promedio de las 63 observaciones, el cual es de:
+
+```{r, echo= FALSE}
+mean(shake$Kcal)
+```
+
+Es decir, ¡está 350 KCal por debajo del promedio de ésta pequeña población de malteadas!, para poder ofrecer una mejor idea, se muestra cómo se distribuye el aporte calórico de las 63 bebidas y dónde se encuentra (aproximadamente) el Unicorn Frapuccino.
+
+```{r, echo= FALSE}
+colors = c("white", "white", "white", "pink", "white",  "white", "white", "white","white",  "white", "white", "white")
+hist(shake$Kcal,breaks=12, col=colors, xlab='KCal', ylab='Frecuencia', main='Distribucion de bebidas por KCal')
+```
+
+Es cierto, el intervalo (400,500) parece ser uno de los más populares para el aporte calórico de las bebidas, pero también parece que el intervalo (0,400) posee tan solo seis observaciones, por lo que las 57 restantes tienen 400 o más KCal, por lo que 410 no se encuentra en un lugar muy exagerado dado que todos en algún momento hemos consumido una o más malteadas de cualquiera de éstos lugares. En éste momento cualquier lector estará pensando que entonces todas las malteadas engordan y deben dejar de consumirlas, pero no, la intención es mostrar que tal vez lo que pintan como un monstruo rosa con azul en realidad puede ser un alimento como los que se consumen en fin de semana sin ningún remordimiento ni consecuencia grave. Puede que aún no esté convencido, por lo que se propone una segunda comparación entre bebidas para localizar al temible monstruo.
+
+La siguiente gráfica de dispersión muestra la comparación entre contenido de Sodio y el aporte calórico de todas las bebidas observadas además de que se organiza por color el establecimiento de comida rápida que las reporta como propias.
+
+```{r, echo= FALSE}
+plt1
+```
+
+Sorprendentemente y aunque todos traten de decir lo contrario, el Unicorn Frapuccino se encuentra tan solo en el octavo lugar dentro de toda la población con respecto a su contenido calórico, también cabe señalar que está precedido únicamente por bebidas del mismo establecimiento que lo prepara y en un rango cercano sólo existen dos marcas que preparan bebidas similares. Cada vez parece menos peligroso el tomar esas 410 calorías en una ida al café, ¿cierto? 
+
+El autor de éste texto se deslinda de cualquier relación con las empresas citadas, además de que hace énfasis en no desear perjudicar ni celebrar las prácticas y visiones de ellas, el fin es únicamente informativo y se proporciona información reportada en los siguientes sitios:
+
+http://www.johnnyrockets.com/menu/nutrition-calculator.html
+https://www.starbucks.com/menu/drinks/frappuccino-blended-beverages
+https://www.dairyqueen.com/Global/Nutrition/2016/2016%20Nutrition%20Food%20and%20Treat%20US.pdf
+https://www.mcdonalds.com/us/en-us/about-our-food/nutrition-calculator.html
+https://www.bk.com/pdfs/nutrition.pdf
+https://www.wendys.com/en-us/nutrition-info
+http://d28v28wegaf6ww.cloudfront.net/system/pdf_menus/26/original/Nutrition_Brochures_10.26.16.pdf?1477518751
